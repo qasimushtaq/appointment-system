@@ -117,3 +117,28 @@ def app_info():
 
     input("Press enter to return to menu\n")
     main_menu()
+
+def collect_details():
+    """
+    Collects the patient's details from other functions
+    and adds them to a list that can be appended to the
+    appointments sheet after being checked and confirmed.
+    """
+    clear_tmnl()
+    appt_categories = APPTS.row_values(1)
+    appt_detail = dict.fromkeys(appt_categories)
+
+    appt_detail["Date"] = get_date("book")
+    appt_detail["Time"] = get_time(appt_detail["Date"])
+    appt_detail["Name"] = get_name("f_name")
+    appt_detail["Surname"] = get_name("l_name")
+
+    appt_details = list(appt_detail.values())
+    existing_appt_check = check_existing_appts(appt_details)
+    if existing_appt_check:
+        clear_tmnl()
+        print("A booking for this patient already exists on this date.")
+        print("You can only book one appointment per day per patient.\n")
+        book_again_prompt("terminated")
+    else:
+        confirm_appointment(appt_details)
