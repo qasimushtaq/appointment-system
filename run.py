@@ -405,3 +405,28 @@ def get_appts_for_name(name):
             name_appts.append(name_appt)
 
     return name_appts
+
+def search_date(specification):
+    """
+    Defines search_dte variable using the current date or returned
+    date depending on the argument provided and passes it to
+    get_appts_for_date function to get the relevant records to
+    pass to the display_records function.
+    """
+    clear_tmnl()
+    if specification == "today":
+        search_dte = CURRENT_DATE_FMTED
+        date_desc = "today"
+    elif specification == "search":
+        search_dte = get_date("search")
+        date_desc = f"the date {search_dte}"
+
+    dte_heads = ["Time", "Name", "Surname"]
+    date_appts = get_appts_for_date(search_dte, "bookings")
+
+    date_recs = []
+    for date_appt in date_appts:
+        date_rec = date_appt[1:4]
+        date_recs.append(date_rec)
+
+    display_records(date_recs, date_desc, dte_heads)
