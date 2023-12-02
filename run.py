@@ -86,3 +86,34 @@ def search_menu():
         search_date("search")
     elif search_ans == ("3"):
         main_menu()
+
+def app_info():
+    """
+    Provides the user with instructions on how to use the app.
+    Once the user has read and is satisfied, they may press enter
+    to return to the main menu.
+    """
+    clear_tmnl()
+
+    print("To book an appointment:")
+    print("1 - Select option '(1)' in the menu.")
+    print("2 - Enter the details that are requested, one by one.")
+    print("3 - Confirm the details to book or cancel the booking.")
+    print("NB - Enter 'Exit' when entering details to stop/return to menu.\n")
+
+    print("To view today's appointments, select option '(2)' in the menu.\n")
+
+    print("To search for specific appointments:")
+    print("1 - Select option '(3)' in the menu to go to the search menu.")
+    print("2 - Select between options to search for a name or a date.")
+    print("3 - Enter the name/date you wish to search for.")
+    print("4 - View the results of your search.\n")
+
+    print("To cancel an appointment:")
+    print("1 - Select option '(4)' in the menu.")
+    print("2 - Enter the name and surname you wish to cancel for, one by one.")
+    print("3 - Provide final confirmation to cancel the appointment.")
+    print("NB - Enter 'Exit' when entering details to stop/return to menu.\n")
+
+    input("Press enter to return to menu\n")
+    main_menu()
