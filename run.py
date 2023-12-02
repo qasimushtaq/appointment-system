@@ -60,3 +60,29 @@ def main_menu():
     elif main_menu_ans == ("5"):
         app_info()
        
+def search_menu():
+    """
+    Displays options to search by date, by name, or return to the main menu.
+    """
+    clear_tmnl()
+    print("Appointment Syatem - Search Menu\n")
+    print("What would you like to do?\n")
+
+    print("(1) Search appointments by name.")
+    print("(2) Search appointments by date.")
+    print("(3) Return to main menu.")
+
+    while True:
+        search_ans = input("\n")
+        if search_ans not in ("1", "2", "3"):
+            print("Invalid input.")
+            print("Please choose an option between 1 and 2.")
+        else:
+            break
+
+    if search_ans == ("1"):
+        search_name("view")
+    elif search_ans == ("2"):
+        search_date("search")
+    elif search_ans == ("3"):
+        main_menu()
