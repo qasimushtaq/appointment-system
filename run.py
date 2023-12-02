@@ -332,3 +332,32 @@ def update_appts(data):
     APPTS.append_row(data, value_input_option='USER_ENTERED')
     print("Appointment booked successfully!")
     sort_sheet()
+
+def book_again_prompt(status):
+    """
+    Provides user with options to either re-enter details or enter
+    details for a new booking depending on the confirmation
+    status provided from the confirm_appointment function.
+    Input is requested until it is valid.
+    """
+    if status == "terminated":
+        prompt = "Enter new details"
+    elif status == "booked":
+        prompt = "Book another appointment"
+
+    print("Please select an option below.\n")
+    print(f"(1) {prompt}.")
+    print("(2) Return to main menu.")
+
+    while True:
+        re_book_ans = input("")
+        if re_book_ans not in ("1", "2"):
+            print("Invalid input.\n")
+            print("Please choose an option between 1 and 2.")
+        else:
+            break
+
+    if re_book_ans == "1":
+        collect_details()
+    elif re_book_ans == "2":
+        main_menu()
