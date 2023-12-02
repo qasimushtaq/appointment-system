@@ -26,6 +26,7 @@ CURRENT_DATE = datetime.date.today()
 # Places and stores the current date into the correct format for when required.
 CURRENT_DATE_FMTED = datetime.datetime.strftime(CURRENT_DATE, "%d/%m/%Y")
 
+
 def main_menu():
     """
     Displays the main menu options for the user
@@ -60,6 +61,7 @@ def main_menu():
     elif main_menu_ans == ("5"):
         app_info()
        
+
 def search_menu():
     """
     Displays options to search by date, by name, or return to the main menu.
@@ -86,6 +88,7 @@ def search_menu():
         search_date("search")
     elif search_ans == ("3"):
         main_menu()
+
 
 def app_info():
     """
@@ -118,6 +121,7 @@ def app_info():
     input("Press enter to return to menu\n")
     main_menu()
 
+
 def collect_details():
     """
     Collects the patient's details from other functions
@@ -142,6 +146,7 @@ def collect_details():
         book_again_prompt("terminated")
     else:
         confirm_appointment(appt_details)
+
 
 def get_date(reason):
     """
@@ -184,6 +189,7 @@ def get_date(reason):
 
     return date_input
 
+
 def get_time(data):
     """
     Provides list options of available times and requests input for desired
@@ -220,6 +226,8 @@ def get_time(data):
             main_menu()
         else:
             return time_input
+
+
 def get_avail_times(data):
     """
     Gets return value from get_appts_for_date function for booked times
@@ -244,6 +252,8 @@ def get_avail_times(data):
         return today_av_times
     else:
         return av_times
+
+
 def get_name(name_part):
     """
     Gets the name input from the user and validates that it contains
@@ -274,6 +284,8 @@ def get_name(name_part):
         main_menu()
     else:
         return pat_name
+
+
 def check_existing_appts(details):
     """
     Checks the appointment records for the name and date provided
@@ -293,6 +305,7 @@ def check_existing_appts(details):
                 existing_appt = True
 
     return existing_appt
+
 
 def confirm_appointment(data):
     """
@@ -324,6 +337,7 @@ def confirm_appointment(data):
         print("Booking terminated.\n")
         book_again_prompt("terminated")
 
+
 def update_appts(data):
     """
     Updates the appointments sheet using the data provided.
@@ -332,6 +346,7 @@ def update_appts(data):
     APPTS.append_row(data, value_input_option='USER_ENTERED')
     print("Appointment booked successfully!")
     sort_sheet()
+
 
 def book_again_prompt(status):
     """
@@ -390,6 +405,7 @@ def search_name(reason):
     else:
         display_records(name_recs, name_desc, name_heads)
 
+
 def get_appts_for_name(name):
     """
     Gets and returns the appointments booked for the name
@@ -405,6 +421,7 @@ def get_appts_for_name(name):
             name_appts.append(name_appt)
 
     return name_appts
+
 
 def search_date(specification):
     """
@@ -431,6 +448,7 @@ def search_date(specification):
 
     display_records(date_recs, date_desc, dte_heads)
 
+
 def get_appts_for_date(data, required_return):
     """
     Gets the booked appointments for the date provided and returns
@@ -451,6 +469,7 @@ def get_appts_for_date(data, required_return):
         return bookings
     elif required_return == "booked_times":
         return booked_times
+
 
 def display_records(records, topic, heads):
     """
@@ -481,7 +500,6 @@ def display_records(records, topic, heads):
         search_menu()
     elif after_view_ans == ("2"):
         main_menu()
-
 
 
 def cancelation_prompt():
@@ -538,6 +556,7 @@ def cancelation_prompt():
 
     cancel_appt(appt_to_cncl)
 
+
 def cancel_appt(appointment):
     """
     Prompts user to input options to either confirm cancelation or stop it.
@@ -567,6 +586,7 @@ def cancel_appt(appointment):
     input("Press enter to return to menu.\n")
     main_menu()
 
+
 def dlte_past_appts():
     """
     Removes appointment records from the sheet for dates that are in the past.
@@ -580,6 +600,7 @@ def dlte_past_appts():
             for date_cell in date_cells:
                 row_num = date_cell.row
                 APPTS.delete_rows(row_num)
+
 
 def sort_sheet():
     """
