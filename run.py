@@ -482,3 +482,59 @@ def display_records(records, topic, heads):
     elif after_view_ans == ("2"):
         main_menu()
 
+
+
+def cancelation_prompt():
+    """
+    Calls the search_name function to get bookings relative to searched name
+    and presents them to the user. If no bookings are present, allows user to
+    search again or return to menu. If one booking, passes it to cancel_appt
+    function for final confirmation. If multiple bookings, prompts user to
+    choose one to cancel then passes it to cancel_appt function.
+    """
+    clear_tmnl()
+    search_info = search_name("cancelation")
+    cncl_name = ' '.join(search_info[0])
+    appt_opts = search_info[1]
+    dates_and_times = search_info[2]
+
+    cncl_opts = []
+    for date_and_time in dates_and_times:
+        cncl_opt = ' at '.join(date_and_time)
+        cncl_opts.append(cncl_opt)
+
+    clear_tmnl()
+    if bool(appt_opts) is False:
+        print(f"There are no appointments booked for {cncl_name}.\n")
+        print("Enter 1 to search again or 2 to return to menu.")
+        while True:
+            search_again_ans = input("\n")
+            if search_again_ans not in ("1", "2"):
+                print("Invalid input.\n")
+                print("Please choose an option between 1 and 2.")
+            else:
+                break
+        if search_again_ans == "1":
+            cancelation_prompt()
+        elif search_again_ans == "2":
+            main_menu()
+
+    if len(cncl_opts) == 1:
+        appt_to_cncl = appt_opts[0]
+
+    else:
+        print(f"Below is a list of appointments for the name {cncl_name}.\n")
+        cncl_ans = pyip.inputMenu(cncl_opts,
+                                  prompt="Select an appointment to cancel.\n",
+                                  numbered=True,
+                                  allowRegexes=[("Exit"), ("exit")]
+                                  )
+        if cncl_ans.capitalize() == "Exit":
+            main_menu()
+        else:
+            for appt_opt in appt_opts:
+                if cncl_ans.split(" ")[0] in appt_opt:
+                    appt_to_cncl = appt_opt
+
+    cancel_appt(appt_to_cncl)
+
