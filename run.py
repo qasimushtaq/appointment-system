@@ -274,3 +274,22 @@ def get_name(name_part):
         main_menu()
     else:
         return pat_name
+def check_existing_appts(details):
+    """
+    Checks the appointment records for the name and date provided
+    and if a booking already exists for the details, returns true,
+    otherwise, it returns false.
+    """
+    detail_date = details[0]
+    detail_name = details[2:4]
+    date_bookings = get_appts_for_date(detail_date, "bookings")
+
+    # Idea on how to implement check came from stackoverflow.
+    # (Link in the readme)
+    existing_appt = None
+    for booking in date_bookings:
+        for i in range(len(booking) - len(detail_name) + 1):
+            if detail_name == booking[i:i+len(detail_name)]:
+                existing_appt = True
+
+    return existing_appt
