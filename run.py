@@ -538,3 +538,32 @@ def cancelation_prompt():
 
     cancel_appt(appt_to_cncl)
 
+def cancel_appt(appointment):
+    """
+    Prompts user to input options to either confirm cancelation or stop it.
+    If confirmed, it gets the row number of the appointment to cancel
+    and deletes the row from the appointments sheet. If stopped it
+    returns the user to the main menu.
+    """
+    clear_tmnl()
+    print(f"Appointment cancelation for:\n")
+    print(f"{' '.join(appointment[2:4])} on {appointment[0]}.\n")
+    print("Enter 1 to confirm or 2 to stop the cancelation.")
+
+    while True:
+        cncl_confirmation = input("\n")
+        if cncl_confirmation not in ("1", "2"):
+            print("Invalid input.\n")
+            print("Please choose an option between 1 and 2.")
+        else:
+            break
+    if cncl_confirmation == "2":
+        main_menu()
+    elif cncl_confirmation == "1":
+        row_to_dlte = appointment[-1]
+        APPTS.delete_rows(row_to_dlte)
+        print("Appointment cancelled successfully.\n")
+
+    input("Press enter to return to menu.\n")
+    main_menu()
+
