@@ -220,3 +220,27 @@ def get_time(data):
             main_menu()
         else:
             return time_input
+def get_avail_times(data):
+    """
+    Gets return value from get_appts_for_date function for booked times
+    and removes them from the appointment times list to create a list of
+    available times and returns the available times. If the current date
+    is input, past times are removed from available times.
+    """
+    appt_times = ["0800",
+                  "0900",
+                  "1000",
+                  "1100",
+                  "1200",
+                  "1400",
+                  "1500",
+                  "1600"
+                  ]
+    unav_times = get_appts_for_date(data, "booked_times")
+    av_times = [time for time in appt_times if time not in unav_times]
+    if data == CURRENT_DATE_FMTED:
+        current_time = datetime.datetime.now().strftime("%H%M")
+        today_av_times = [time for time in av_times if time > current_time]
+        return today_av_times
+    else:
+        return av_times
