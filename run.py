@@ -184,3 +184,39 @@ def get_date(reason):
 
     return date_input
 
+def get_time(data):
+    """
+    Provides list options of available times and requests input for desired
+    time. If only one time is available it prompts the user to continue or
+    enter a new date. Requests input until it is valid or returns to menu
+    if 'Exit' is input.
+    """
+    clear_tmnl()
+    times = get_avail_times(data)
+    if len(times) == 1:
+        print(f"The only available time on {data} is {times[0]}.\n")
+        print("Press 1 to continue with this time or 2 to enter a new date.")
+        while True:
+            time_ans = input("")
+            if time_ans not in ("1", "2"):
+                print("Invalid input.\n")
+                print("Please choose an option between 1 and 2.")
+            else:
+                break
+        if time_ans == "1":
+            time_input = times[0]
+            return time_input
+        else:
+            collect_details()
+
+    else:
+        print(f"Below is a list of available times for {data}.\n")
+        time_input = pyip.inputMenu(times,
+                                    prompt="Select a time from the list.\n",
+                                    numbered=True,
+                                    allowRegexes=[("Exit"), ("exit")]
+                                    )
+        if time_input.capitalize() == "Exit":
+            main_menu()
+        else:
+            return time_input
