@@ -389,3 +389,19 @@ def search_name(reason):
         return [search_nme, name_appts, name_recs]
     else:
         display_records(name_recs, name_desc, name_heads)
+
+def get_appts_for_name(name):
+    """
+    Gets and returns the appointments booked for the name
+    provided as an argument.
+    """
+    all_appts = APPTS.get_all_values()
+    name_appts = []
+    for appt in all_appts[1:]:
+        appt_name = appt[2:4]
+        if appt_name == name:
+            name_appt_row = [all_appts.index(appt) + 1]
+            name_appt = appt + name_appt_row
+            name_appts.append(name_appt)
+
+    return name_appts
