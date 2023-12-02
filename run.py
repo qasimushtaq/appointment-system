@@ -451,3 +451,34 @@ def get_appts_for_date(data, required_return):
         return bookings
     elif required_return == "booked_times":
         return booked_times
+
+def display_records(records, topic, heads):
+    """
+    Displays data in a table format using headers and data provided
+    as arguments (records and heads) and prints text about the table
+    using the argument provided to the topic parameter. If the records
+    are empty then it informs the user that no records are available.
+    User is then prompted to input options to return to search menu
+    or main menu. Input is requested until it is valid.
+    """
+    clear_tmnl()
+    if records == []:
+        print(f"There are no appointments booked for {topic}.\n")
+    else:
+        print(f"Below are the appointments booked for {topic}.\n")
+        print(tabulate(records, headers=heads, tablefmt="fancy_grid"))
+
+    print("Enter 1 for the search menu or 2 for the main menu.")
+    while True:
+        after_view_ans = input("\n")
+        if after_view_ans not in ("1", "2"):
+            print("Invalid input.")
+            print("Please choose an option between 1 and 2.")
+        else:
+            break
+
+    if after_view_ans == ("1"):
+        search_menu()
+    elif after_view_ans == ("2"):
+        main_menu()
+
