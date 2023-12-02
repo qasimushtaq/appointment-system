@@ -580,3 +580,31 @@ def dlte_past_appts():
             for date_cell in date_cells:
                 row_num = date_cell.row
                 APPTS.delete_rows(row_num)
+
+def sort_sheet():
+    """
+    Sorts the sheet by dates and times.
+    """
+    APPTS.sort((2, "asc"))
+    APPTS.sort((1, "asc"))
+
+
+def clear_tmnl():
+    """
+    Clears the terminal when called.
+    """
+    # Idea taken from a post on slack.
+    # (Credited in readme)
+    os.system("clear")
+
+
+def main():
+    """
+    Runs necessary functions at the start of the program.
+    """
+    dlte_past_appts()
+    sort_sheet()
+    main_menu()
+
+
+main()
