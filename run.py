@@ -361,3 +361,31 @@ def book_again_prompt(status):
         collect_details()
     elif re_book_ans == "2":
         main_menu()
+
+
+def search_name(reason):
+    """
+    Gets return values of get_name function for both name and surname
+    and defines them in a single variable (search_name) as a list
+    to pass to get_appts_for_name function and finally passes the
+    returned records to the display_records function or returns them
+    to the cancelation prompt, depending on argument given.
+    """
+    clear_tmnl()
+    f_name = get_name("f_name")
+    l_name = get_name("l_name")
+    search_nme = [f_name, l_name]
+    name_appts = get_appts_for_name(search_nme)
+
+    name_recs = []
+    for name_appt in name_appts:
+        name_rec = name_appt[0:2]
+        name_recs.append(name_rec)
+
+    name_desc = f"the name {' '.join(search_nme)}"
+    name_heads = ["Date", "Time"]
+
+    if reason == "cancelation":
+        return [search_nme, name_appts, name_recs]
+    else:
+        display_records(name_recs, name_desc, name_heads)
