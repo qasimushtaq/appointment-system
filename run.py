@@ -124,7 +124,7 @@ def app_info():
 
 def collect_details():
     """
-    Collects the patient's details from other functions
+    Collects the person details from other functions
     and adds them to a list that can be appended to the
     appointments sheet after being checked and confirmed.
     """
@@ -141,8 +141,8 @@ def collect_details():
     existing_appt_check = check_existing_appts(appt_details)
     if existing_appt_check:
         clear_tmnl()
-        print("A booking for this patient already exists on this date.")
-        print("You can only book one appointment per day per patient.\n")
+        print("A booking for this person already exists on this date.")
+        print("You can only book one appointment per day per person.\n")
         book_again_prompt("terminated")
     else:
         confirm_appointment(appt_details)
@@ -267,7 +267,7 @@ def get_name(name_part):
     elif name_part == ("l_name"):
         name_prompt = "surname"
 
-    print(f"Please enter the patient's {name_prompt}.")
+    print(f"Please enter the person's {name_prompt}.")
 
     while True:
         pat_name = input("\n").capitalize()
