@@ -67,7 +67,7 @@ def search_menu():
     Displays options to search by date, by name, or return to the main menu.
     """
     clear_tmnl()
-    print("Appointment Syatem - Search Menu\n")
+    print("Appointment System - Search Menu\n")
     print("What would you like to do?\n")
 
     print("(1) Search appointments by name.")
